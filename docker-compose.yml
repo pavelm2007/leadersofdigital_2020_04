@@ -1,0 +1,66 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: "postgres:alpine"
+    ports:
+      - "54323:5432"
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+    #  - db:/var/lib/postgresql/data
+    env_file: backend/.env
+
+  #broker:
+  #  image: "rabbitmq:alpine"
+
+  #result:
+  #  image: "redis:alpine"
+
+  # frontend:
+  #   build:
+  #     dockerfile: frontend/Dockerfile
+  #     context: .
+  #   volumes:
+  #     - .:/app/
+  #     - /app/node_modules
+  #   ports:
+  #     - "3000:3000"
+
+  backend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: backend
+    ports:
+      - "8000:8000"
+      - "54322:5432"
+    volumes:
+      - ./backend:/srv/app
+      - ./data:/srv/data
+      - pip_cache:/root/.cache/pip/
+      - py_env:/srv/env
+    env_file: backend/.env
+    depends_on:
+      - db
+      # - broker
+      # - result
+      # - frontend
+
+  # celery:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: backend
+  #   command: python manage.py celery
+  #   volumes:
+  #     - ./backend/:/home/user/app/
+  #   env_file: backend/.env
+  #   depends_on:
+  #     - db
+  #     - broker
+  #     - result
+
+volumes:
+  py_env:
+  pip_cache:
+    # external: true
+    # name:

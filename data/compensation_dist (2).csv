@@ -1,0 +1,21 @@
+|vacancy|is_trainee|is_junior|is_middle|is_senior|is_lead|compensation_from|compensation_to
+0|.NET Developer|0|0|0|0|0|65000.0|105000.0
+1|.NET Developer|0|0|0|1|0|135000.0|190000.0
+2|2D-художник|0|0|0|0|0|40000.0|70000.0
+3|3D-дизайнер|0|0|0|0|0|40000.0|50000.0
+4|ABAP-разработчик|0|0|0|0|0|67500.0|65000.0
+5|Android разработчик|0|0|0|0|0|90000.0|130000.0
+6|Android разработчик|0|0|0|1|0|160000.0|230000.0
+7|Backend-разработчик|0|0|0|0|0|80000.0|140000.0
+8|Business Analyst|0|0|0|0|0|2250.0|11350.0
+9|Customer Service Specialist|0|0|0|0|0|60000.0|65000.0
+10|Customer Success Manager|0|0|0|0|0|55200.0|66240.0
+11|Customer Support Manager|0|0|0|0|0|24500.0|15500.0
+12|Customer Support Specialist|0|0|0|0|0|15000.0|30000.0
+13|Data Scientist|0|1|0|0|0|43000.0|80000.0
+14|Data Scientist|0|0|0|0|0|100000.0|150000.0
+15|Data Scientist|0|0|0|1|0|190000.0|275000.0
+16|DevOps Engineer|0|0|0|0|0|100000.0|150000.0
+17|DevOps Engineer|0|0|0|1|0|3500.0|100000.0
+18|Digital Marketing Manager|0|0|0|0|0|70000.0|90000.0
+19|Digital Marketing Manager|1|0|0|0|0|15000.0|30000.0
