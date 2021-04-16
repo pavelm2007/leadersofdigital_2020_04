@@ -15,13 +15,15 @@ image: node:14.16
 
 pages:
   stage: deploy
-  # cache:
-  #   paths:
-  #     - frontend/node_modules/
+  cache:
+    paths:
+      - frontend/node_modules/
+    expire_in: 5 days
   script:
     - rm -rf frontend/build
     - cd frontend
-    - npm ci
+    - npm install
+    # - npm ci
     # - npm audit
     - CI='' npm run build
     - cd ..
@@ -30,7 +32,7 @@ pages:
   artifacts:
     paths:
       - public
-    expire_in: 5 days
+    expire_in: 7 days
   only:
     - master
 
