@@ -15,9 +15,9 @@ image: node:14.16
 
 pages:
   stage: deploy
-  cache:
-    paths:
-      - frontend/node_modules/
+  # cache:
+  #   paths:
+  #     - frontend/node_modules/
   script:
     - rm -rf frontend/build
     - cd frontend
