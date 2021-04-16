@@ -1,0 +1,43 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:latest
+
+
+# stages:
+#   - build
+#   - deploy
+#   - notice
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+
+
+pages:
+  stage: deploy
+  cache:
+    paths:
+      - frontend/node_modules/
+  script:
+    - rm -rf frontend/build
+    - cd frontend
+    - npm ci
+    # - npm audit
+    - npm run build
+    - cd ..
+    - rm -rf public
+    - mv frontend/build public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+
+.deploy_pages:
+  stage: notice
+  dependencies:
+    - pages
+  script:
+    - curl https://vps.3128.ru:8888/hook?access_key=$VPS_DEPLOY_WEBHOOK
+  only:
+    - master
