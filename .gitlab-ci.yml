@@ -23,7 +23,7 @@ pages:
     - cd frontend
     - npm ci
     # - npm audit
-    - npm run build
+    - CI='' npm run build
     - cd ..
     - rm -rf public
     - mv frontend/build public
