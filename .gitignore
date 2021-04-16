@@ -20,6 +20,7 @@ __pycache__/
 
 # npm
 node_modules/
+/frontend/node_modules/*
 npm-debug.log
 
 # Webpack
