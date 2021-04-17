@@ -1,20 +1,5 @@
-import {VictoryBar, VictoryChart, VictoryContainer, VictoryGroup, VictoryLegend} from 'victory'
+import {VictoryAxis, VictoryBar, VictoryChart, VictoryContainer, VictoryGroup, VictoryLegend} from 'victory'
 import {Card, CardContent} from '@material-ui/core'
-
-const myDataset = [
-  [
-    {x: 'стуренты', y: 1},
-    {x: 'все', y: 2}
-  ],
-  [
-    {x: 'стуренты', y: 4},
-    {x: 'все', y: 5}
-  ],
-  [
-    {x: 'стуренты', y: 10},
-    {x: 'все', y: 20}
-  ]
-]
 
 export const ColumnChart = ({dataSet, ...props}) => {
 
@@ -53,6 +38,11 @@ export const ColumnChart = ({dataSet, ...props}) => {
                 })
               }
             </VictoryGroup>
+            <VictoryAxis dependentAxis
+                         label="Человек"
+                         style={{
+                           axisLabel: {padding: 60}
+                         }}/>
           </VictoryChart>
         </div>
       </CardContent>

@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet'
-import {Box, Container, Grid, Typography} from '@material-ui/core'
+import {Box, Container, Grid} from '@material-ui/core'
 import InfoBlock from 'src/components/dashboard/InfoBlock'
 import PeopleIcon from '@material-ui/icons/PeopleOutlined'
 import InfoProgress from '../components/dashboard/InfoProgress'
@@ -8,6 +8,7 @@ import Map from 'src/components/map/map'
 import ColumnChart from '../components/charts/Column'
 import {useState} from 'react'
 import {useColumnRegionDataSet} from '../components/charts/utils'
+import ScatterChart from '../components/charts/Scatter'
 
 const Dashboard = () => {
   const [activeRegion, setActiveRegion] = useState(null)
@@ -105,22 +106,26 @@ const Dashboard = () => {
             {!!activeRegion && (
               <Grid
                 item
-                lg={8}
-                md={12}
-                xl={9}
-                xs={12}
+                lg={6}
+              md={6}
+              xl={6}
+              xs={12}
                 alignContent={'center'}
               >
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                  variant="h6"
-                >
-                  {(activeRegion||{}).id}
-                </Typography>
                 <ColumnChart dataSet={columnItems}/>
               </Grid>
             )}
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xl={6}
+              xs={12}
+              alignContent={'center'}
+            >
+              <ScatterChart/>
+            </Grid>
+
           </Grid>
         </Container>
       </Box>

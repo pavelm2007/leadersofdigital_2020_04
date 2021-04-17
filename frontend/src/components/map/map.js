@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 })
 
 
-const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...props}) => {
+const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...other}) => {
   const [coords, setCoords] = useState({})
   const classes = useStyles()
 
@@ -43,14 +43,12 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...pr
 
   return (
     <Card
-      sx={{height: '100%'}}
-      {...props}
+      {...other}
     >
       <CardContent>
         <Grid
           container
           spacing={3}
-          sx={{justifyContent: 'space-between'}}
         >
           <Grid item>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +65,7 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...pr
                     strokeWidth="0.5"
                     id={item.id}
                     onClick={(e) => handleClick(item, e)}
-                    onMouseOver={(e) => handleClick(item, e)}
+                    // onMouseOver={(e) => handleClick(item, e)}
                     onTouchStart={(e) => handleClick(item, e)}
                   />
                 )
