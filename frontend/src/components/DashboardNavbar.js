@@ -10,7 +10,7 @@ import {makeStyles} from '@material-ui/styles'
 const useStyles = makeStyles({
   toolBar: {
     backgroundColor: colors.common.white,
-    width: 'auto'
+    width: 'auto !important'
   },
   title: {marginLeft: 150},
   logo: {
