@@ -33,8 +33,16 @@ const DashboardNavbar = ({onMobileNavOpen, ...rest}) => {
         <RouterLink to="/region_all">
           <Logo className={classes.logo}/>
         </RouterLink>
-        <Box sx={{flexGrow: 1}}/>
-
+        <Box sx={{flexGrow: 1}}>
+          <Typography
+            align="center"
+            color="primary"
+            gutterBottom
+            variant="h4"
+          >
+            Единая система мониторинга потребности в IT-кадрах
+          </Typography>
+        </Box>
         <Hidden lgDown>
           <IconButton color="default" className={classes.btn}>
             <Badge
