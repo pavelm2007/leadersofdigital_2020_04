@@ -2,17 +2,16 @@ import {Card, CardContent, colors, Grid} from '@material-ui/core'
 import {useState} from 'react'
 import {makeStyles} from '@material-ui/styles'
 import {regionPaths, regions} from './map_paths'
-import {getRegionTitleById} from '../charts/utils'
+import {compareByRegionCode, getRegionTitleById} from '../charts/utils'
+import {vacancy} from '../../__mocks__/vacansy'
 
 const useStyles = makeStyles({
   path: {
     transition: 'all .5s',
-    fill: 'rgba(0, 0, 0, 0)',
     stroke: 'rgba(0, 0, 0, 0.5)'
   },
   activePath: {
     transition: 'all .5s',
-    fill: '#f6e72d',
     stroke: 'rgba(0, 0, 0, 0.5)'
   },
   indicator: {
@@ -28,6 +27,16 @@ const useStyles = makeStyles({
     borderRadius: '5px',
     minWidth: '300px',
     textTransform: 'capitalize'
+  },
+  paletteWrap: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  paletteColor: {
+    width: '24px',
+    height: '24px',
+    marginRight: '8px',
+    borderRadius: '4px'
   }
 })
 
@@ -43,11 +52,36 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
 
   const getRegionPath = () => {
     return regionPaths.map(item => {
+      const v = vacancy.find((i) => compareByRegionCode(i, item))
       return {
         ...item,
-        title: getRegionTitleById(item)
+        title: getRegionTitleById(item),
+        vacancy: (v || {}).it
       }
     })
+  }
+
+  const getColorByVacancy = ({vacancy}) => {
+    let color = colors.blueGrey.A100
+    console.log(vacancy, typeof vacancy, vacancy < 400)
+    switch (true) {
+      case vacancy < 200:
+        color = colors.blueGrey.A200
+        break
+      case vacancy < 400:
+        color = colors.blueGrey.A400
+        break
+      case vacancy < 600:
+        color = colors.blueGrey['500']
+        break
+      case vacancy < 800:
+        color = colors.blueGrey['600']
+        break
+      default:
+        color = colors.blueGrey.A700
+        break
+    }
+    return color
   }
 
   return (
@@ -69,9 +103,10 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
                   <path
                     key={i}
                     className={item.id === id ? [classes.activePath] : classes.path}
+                    fill={getColorByVacancy(item)}
                     d={item.path}
                     stroke={item.id === id ? colors.lime.A100 : colors.lime.A700}
-                    strokeWidth={item.id === id ? '5.5' : '0.5'}
+                    strokeWidth={item.id === id ? '7' : '3'}
                     id={item.id}
                     onClick={(e) => handleClick(item, e)}
                     // onMouseOver={(e) => handleClick(item, e)}
@@ -80,6 +115,31 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
                 )
               })}
             </svg>
+            <Grid
+              container
+              spacing={3}
+            >
+              <Grid item xs={2} className={classes.paletteWrap}>
+                <div className={classes.paletteColor} style={{backgroundColor: colors.blueGrey.A200}}/>
+                <div>{'0-200'}</div>
+              </Grid>
+              <Grid item xs={2} className={classes.paletteWrap}>
+                <div className={classes.paletteColor} style={{backgroundColor: colors.blueGrey.A400}}/>
+                <div>{'201-400'}</div>
+              </Grid>
+              <Grid item xs={2} className={classes.paletteWrap}>
+                <div className={classes.paletteColor} style={{backgroundColor: colors.blueGrey['500']}}/>
+                <div>{'401-600'}</div>
+              </Grid>
+              <Grid item xs={2} className={classes.paletteWrap}>
+                <div className={classes.paletteColor} style={{backgroundColor: colors.blueGrey['600']}}/>
+                <div>{'601-800'}</div>
+              </Grid>
+              <Grid item xs={2} className={classes.paletteWrap}>
+                <div className={classes.paletteColor} style={{backgroundColor: colors.blueGrey.A700}}/>
+                <div>{'>800'}</div>
+              </Grid>
+            </Grid>
             {showTooltip && (
               <div
                 className={!!activeRegion ? classes.indicatorActive : classes.indicator}

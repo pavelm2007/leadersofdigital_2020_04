@@ -41,12 +41,12 @@ export const ColumnChart = ({dataSet, ...props}) => {
                 )
               })}
               <VictoryAxis
-                           label="Вакансий"
+                           label="Вакансии"
                            style={{
                              axisLabel: {padding: 40}
                            }}/>
               <VictoryAxis dependentAxis
-                           label="Вакансий"
+                           label="Вакансии"
                            style={{
                              axisLabel: {padding: 40}
                            }}/>

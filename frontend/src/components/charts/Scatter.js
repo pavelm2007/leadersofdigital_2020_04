@@ -32,7 +32,7 @@ export const ScatterChart = ({dataSet, activeRegion, ...props}) => {
               }}
             />
             <VictoryAxis
-              label="Зарплата it "
+              label="Зарплата IT, ₽"
               style={{
                 axisLabel: {padding: 30}
               }}

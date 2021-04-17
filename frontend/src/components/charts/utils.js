@@ -4,8 +4,6 @@ import {vacancy} from 'src/__mocks__/vacansy'
 import {students} from 'src/__mocks__/students'
 import {dynamicsSVE} from 'src/__mocks__/dinamika_SVE'
 import {salaryGraduate} from 'src/__mocks__/salary_graduates'
-import PeopleIcon from '@material-ui/icons/PeopleOutlined'
-import MoneyIcon from '@material-ui/icons/Money'
 import {regions} from '../map/map_paths'
 import {colors} from '@material-ui/core'
 
@@ -149,10 +147,10 @@ export const useFetchRegionInfo = (region) => {
         const salary = salaryGraduate.find((item) => compareByRegionCode(item, region))
 
         const data = [
-          {title: 'Выпускники', indicatorValue: `${graduateData.it} чел.`, icon: <PeopleIcon/>},
-          {title: 'Вакансий', indicatorValue: `${vacancyData.it} чел.`, icon: <PeopleIcon/>},
-          {title: 'Студенты', indicatorValue: `${studentData.it} чел.`, icon: <PeopleIcon/>},
-          {title: 'Зарплата', indicatorValue: `${salary.it_salary} ₽`, icon: <MoneyIcon/>}
+          {title: 'Выпускники (IT)', indicatorValue: `${graduateData.it} чел.`},
+          {title: 'Вакансий (IT)', indicatorValue: `${vacancyData.it}`},
+          {title: 'Студенты (IT)', indicatorValue: `${studentData.it} чел.`},
+          {title: 'Зарплата (IT)', indicatorValue: `${salary.it_salary} ₽`}
 
         ]
         setRegionInfo(data)
@@ -171,10 +169,10 @@ export const useFetchRegionInfo = (region) => {
         })
 
         const data = [
-          {title: 'Выпускники', indicatorValue: `${parseInt(graduateTotal)} чел.`, icon: <PeopleIcon fontSize={12}/>},
-          {title: 'Вакансий', indicatorValue: `${parseInt(vacancyTotal)} чел.`, icon: <PeopleIcon/>},
-          {title: 'Студенты', indicatorValue: `${parseInt(studentTotal)} чел.`, icon: <PeopleIcon/>},
-          {title: 'Зарплата', indicatorValue: `${parseInt(salaryTotal / salaryGraduate.length)} ₽`, icon: <MoneyIcon/>}
+          {title: 'Выпускники (IT)', indicatorValue: `${parseInt(graduateTotal)} чел.`},
+          {title: 'Вакансий (IT)', indicatorValue: `${parseInt(vacancyTotal)}`},
+          {title: 'Студенты (IT)', indicatorValue: `${parseInt(studentTotal)} чел.`},
+          {title: 'Зарплата (IT)', indicatorValue: `${parseInt(salaryTotal / salaryGraduate.length)} ₽`}
 
         ]
         setRegionInfo(data)
