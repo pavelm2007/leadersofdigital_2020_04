@@ -3,21 +3,25 @@ import {graduates} from 'src/__mocks__/graduates'
 import {vacancy} from 'src/__mocks__/vacansy'
 import {students} from 'src/__mocks__/students'
 import {dynamicsSVE} from 'src/__mocks__/dinamika_SVE'
-import {colors} from '@material-ui/core'
+import {salaryGraduate} from 'src/__mocks__/salary_graduates'
+import PeopleIcon from '@material-ui/icons/PeopleOutlined'
+import MoneyIcon from '@material-ui/icons/Money'
 
+
+export const compareByRegionCode = (item, region) => {
+  return item.region_code === region.id
+}
 
 export const useColumnRegionDataSet = (region) => {
   const [columnItems, setColumnItems] = useState(null)
 
   const setColumnDataSet = (region) => {
-    const compareByRegionCode = (item) => {
-      return item.region_code === region.id
-    }
+
 
     if (region !== null) {
-      const graduateData = graduates.find(compareByRegionCode)
-      const vacancyData = vacancy.find(compareByRegionCode)
-      const studentData = students.find(compareByRegionCode)
+      const graduateData = graduates.find((item) => compareByRegionCode(item, region))
+      const vacancyData = vacancy.find((item) => compareByRegionCode(item, region))
+      const studentData = students.find((item) => compareByRegionCode(item, region))
 
       const data = [
         {
@@ -81,6 +85,57 @@ export const useFetchSpecialities = (specialities) => {
     setDynamicsData(data)
   }, [specialities])
   return [dynamicsData]
+}
+
+
+export const useFetchSalaryGraduates = () => {
+  const [salaryGraduates, setSalaryGraduates] = useState(null)
+  useEffect(() => {
+    const data = salaryGraduate.map(item => {
+      return {x: item.it_salary, y: item.it_graduates}
+    })
+    setSalaryGraduates(data)
+  }, [])
+  return [salaryGraduates]
+}
+
+export const useFetchRegionInfo = (region) => {
+  const [regionInfo, setRegionInfo] = useState([])
+
+  useEffect(() => {
+      if (region !== null) {
+        const graduateData = graduates.find((item) => compareByRegionCode(item, region))
+        const vacancyData = vacancy.find((item) => compareByRegionCode(item, region))
+        const studentData = students.find((item) => compareByRegionCode(item, region))
+        const salary = salaryGraduate.find((item) => compareByRegionCode(item, region))
+
+        const data = [
+          {title: 'Выпускники', indicatorValue: `${graduateData.it} чел.`, icon: <PeopleIcon/>},
+          {title: 'Вакансий', indicatorValue: `${vacancyData.it} чел.`, icon: <PeopleIcon/>},
+          {title: 'Студенты', indicatorValue: `${studentData.it} чел.`, icon: <PeopleIcon/>},
+          {title: 'Зарплата', indicatorValue: `${salary.it_salary} ₽`, icon: <MoneyIcon/>}
+
+        ]
+        setRegionInfo(data)
+      } else {
+        const graduateTotal = graduates.map(x => x.it).reduce((a, b) => {return a + b})
+        const vacancyTotal = vacancy.map(x => x.it).reduce((a, b) => {return a + b})
+        const studentTotal = students.map(x => x.it).reduce((a, b) => {return a + b})
+        const salaryTotal = salaryGraduate.map(x => x.it_salary).reduce((a, b) => {return a + b})
+
+        const data = [
+          {title: 'Выпускники', indicatorValue: `${parseInt(graduateTotal)} чел.`, icon: <PeopleIcon/>},
+          {title: 'Вакансий', indicatorValue: `${parseInt(vacancyTotal)} чел.`, icon: <PeopleIcon/>},
+          {title: 'Студенты', indicatorValue: `${parseInt(studentTotal)} чел.`, icon: <PeopleIcon/>},
+          {title: 'Зарплата', indicatorValue: `${parseInt(salaryTotal/salaryGraduate.length)} ₽`, icon: <MoneyIcon/>}
+
+        ]
+        setRegionInfo(data)
+
+      }
+    }, [region]
+  )
+  return [regionInfo]
 }
 
 export const getSpecialityOptions = (items) => {

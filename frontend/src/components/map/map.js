@@ -36,7 +36,6 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
   const classes = useStyles()
 
   const handleClick = (region, e) => {
-    // setActiveRegion(regions.find(item => item[0] === id))
     setCoords({'x': e.pageX, 'y': e.pageY})
     handleChoiceRegion(region)
   }
