@@ -63,7 +63,6 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
 
   const getColorByVacancy = ({vacancy}) => {
     let color = colors.blueGrey.A100
-    console.log(vacancy, typeof vacancy, vacancy < 400)
     switch (true) {
       case vacancy < 200:
         color = colors.blueGrey.A200
