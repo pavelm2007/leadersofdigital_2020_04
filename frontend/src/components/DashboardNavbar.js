@@ -1,4 +1,3 @@
-import {useState} from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {AppBar, Badge, Box, colors, Hidden, IconButton, Toolbar, Typography} from '@material-ui/core'
@@ -10,10 +9,12 @@ import {makeStyles} from '@material-ui/styles'
 
 const useStyles = makeStyles({
   toolBar: {
-    backgroundColor: colors.common.white
+    backgroundColor: colors.common.white,
+    width: 'auto'
   },
+  title: {marginLeft: 150},
   logo: {
-    height: '44px'
+    height: '32px'
   },
   btn: {
     color: colors.common.black
@@ -32,7 +33,7 @@ const DashboardNavbar = ({onMobileNavOpen, ...rest}) => {
         <RouterLink to="/region_all">
           <Logo className={classes.logo}/>
         </RouterLink>
-        <Box sx={{flexGrow: 1}}>
+        <Box className={classes.title}>
           <Typography
             align="center"
             color="primary"
@@ -42,6 +43,7 @@ const DashboardNavbar = ({onMobileNavOpen, ...rest}) => {
             Единая система мониторинга потребности в IT-кадрах
           </Typography>
         </Box>
+        <Box sx={{flexGrow: 1}}/>
 
         <Hidden lgDown>
           <IconButton color="default" className={classes.btn}>

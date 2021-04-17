@@ -12,6 +12,7 @@ const useStyles = makeStyles({
   },
   activePath: {
     transition: 'all .5s',
+    fill: colors.green['50'],
     stroke: 'rgba(0, 0, 0, 0.5)'
   },
   indicator: {
