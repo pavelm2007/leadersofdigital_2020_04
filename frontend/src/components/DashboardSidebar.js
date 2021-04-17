@@ -5,11 +5,8 @@ import {Avatar, Box, Divider, Drawer, Hidden, List, Typography} from '@material-
 import {
   AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
-  Lock as LockIcon,
-  Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
-  UserPlus as UserPlusIcon,
   Users as UsersIcon
 } from 'react-feather'
 import NavItem from './NavItem'
@@ -27,41 +24,21 @@ const items = [
     icon: BarChartIcon,
     title: 'Dashboard'
   },
-  {
-    href: '/customers',
-    icon: UsersIcon,
-    title: 'Customers'
-  },
-  {
-    href: '/products',
-    icon: ShoppingBagIcon,
-    title: 'Products'
-  },
-  {
-    href: '/account',
-    icon: UserIcon,
-    title: 'Account'
-  },
-  {
-    href: '/settings',
-    icon: SettingsIcon,
-    title: 'Settings'
-  },
-  {
-    href: '/app/login',
-    icon: LockIcon,
-    title: 'Login'
-  },
-  {
-    href: '/app/register',
-    icon: UserPlusIcon,
-    title: 'Register'
-  },
-  {
-    href: '/app/404',
-    icon: AlertCircleIcon,
-    title: 'Error'
-  }
+  // {
+  //   href: '/customers',
+  //   icon: UsersIcon,
+  //   title: 'Customers'
+  // },
+  // {
+  //   href: '/account',
+  //   icon: UserIcon,
+  //   title: 'Account'
+  // },
+  // {
+  //   href: '/app/404',
+  //   icon: AlertCircleIcon,
+  //   title: 'Error'
+  // }
 ]
 
 const useStyles = makeStyles({
