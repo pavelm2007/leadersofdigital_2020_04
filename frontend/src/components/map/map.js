@@ -31,17 +31,12 @@ const useStyles = makeStyles({
 })
 
 
-const Map = ({handleChoiceRegion, ...props}) => {
-  const [activeRegionId, setActiveRegionId] = useState(null)
-  const [activeRegion, setActiveRegion] = useState(null)
+const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...props}) => {
   const [coords, setCoords] = useState({})
   const classes = useStyles()
 
   const handleClick = (region, e) => {
-    const {id} = region
-    setActiveRegionId(id)
-    // getRegionById(activeRegionId)
-    setActiveRegion(regions.find(item => item[0] === id))
+    // setActiveRegion(regions.find(item => item[0] === id))
     setCoords({'x': e.pageX, 'y': e.pageY})
     handleChoiceRegion(region)
   }
@@ -61,13 +56,14 @@ const Map = ({handleChoiceRegion, ...props}) => {
             <svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
                  xmlnsXlink="http://www.w3.org/1999/xlink" version="1.2" x="0px" y="0px"
                  height="620px" viewBox="0 0 1090 620" xmlSpace="preserve">
-              {regionPaths.map((item, index) => {
+              {regionPaths.map((item, i) => {
+                const {id} = activeRegion || {}
                 return (
                   <path
-                    key={index}
-                    className={item.id === activeRegionId ? [classes.activePath] : classes.path}
+                    key={i}
+                    className={item.id === id ? [classes.activePath] : classes.path}
                     d={item.path}
-                    stroke={item.id === activeRegionId ? colors.lime.A100 : colors.lime.A700}
+                    stroke={item.id === id ? colors.lime.A100 : colors.lime.A700}
                     strokeWidth="0.5"
                     id={item.id}
                     onClick={(e) => handleClick(item, e)}
@@ -77,12 +73,16 @@ const Map = ({handleChoiceRegion, ...props}) => {
                 )
               })}
             </svg>
-            <div
-              className={!!activeRegion ? classes.indicatorActive : classes.indicator}
-              style={{top: `${coords.y}px`, left: `${coords.x}px`}}
-            >
-              {!!activeRegion && activeRegion[1]}
-            </div>
+            {showTooltip && (
+              <div
+                className={!!activeRegion ? classes.indicatorActive : classes.indicator}
+                style={{top: `${coords.y}px`, left: `${coords.x}px`}}
+
+              >
+                {!!activeRegion && regions.find(item => item[0] === activeRegion.id)[1]}
+              </div>
+            )}
+
           </Grid>
         </Grid>
       </CardContent>

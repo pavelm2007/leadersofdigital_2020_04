@@ -1,28 +1,27 @@
 import {Helmet} from 'react-helmet'
-import {Box, Container, Grid, Typography} from '@material-ui/core'
+import {Box, Container, Grid} from '@material-ui/core'
 import InfoBlock from 'src/components/dashboard/InfoBlock'
 import PeopleIcon from '@material-ui/icons/PeopleOutlined'
 import InfoProgress from '../components/dashboard/InfoProgress'
 import InsertChartIcon from '@material-ui/icons/InsertChartOutlined'
 import Map from 'src/components/map/map'
 import ColumnChart from '../components/charts/Column'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useColumnRegionDataSet} from '../components/charts/utils'
 
-const Dashboard = () => {
-  const [activeRegion, setActiveRegion] = useState(null)
+const DashboardRegion = () => {
+  const defaultRegion = {id: 'RU-SVE'}
+  const [activeRegion] = useState(defaultRegion)
   const [columnItems, setColumnDataSet] = useColumnRegionDataSet(activeRegion)
 
-  const handleSetRegion = (region) => {
-    setActiveRegion(region)
-    setColumnDataSet(region)
-
-  }
+  useEffect(() => {
+    setColumnDataSet(defaultRegion)
+  }, [])
 
   return (
     <>
       <Helmet>
-        <title> Развитие кадров | EdTech</title>
+        <title> Екатеринбург | EdTech</title>
       </Helmet>
       <Box
         sx={{
@@ -99,10 +98,15 @@ const Dashboard = () => {
               xs={12}
               alignContent={'center'}
             >
-              <Map activeRegion={activeRegion} handleChoiceRegion={(x) => handleSetRegion(x)}/>
+              <Map
+                activeRegion={activeRegion}
+                showTooltip={false}
+                handleChoiceRegion={() => {
+                }}
+              />
             </Grid>
 
-            {!!activeRegion && (
+            {!!activeRegion && !!columnItems && (
               <Grid
                 item
                 lg={8}
@@ -111,13 +115,6 @@ const Dashboard = () => {
                 xs={12}
                 alignContent={'center'}
               >
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                  variant="h6"
-                >
-                  {(activeRegion||{}).id}
-                </Typography>
                 <ColumnChart dataSet={columnItems}/>
               </Grid>
             )}
@@ -129,4 +126,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default DashboardRegion

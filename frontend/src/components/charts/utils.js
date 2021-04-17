@@ -1,46 +1,39 @@
 import {useState} from 'react'
-import {graduates} from 'src/__mocks__/graduates';
-import {vacansy} from 'src/__mocks__/vacansy';
-import {students} from 'src/__mocks__/students';
+import {graduates} from 'src/__mocks__/graduates'
+import {vacancy} from 'src/__mocks__/vacansy'
+import {students} from 'src/__mocks__/students'
 
 export const useColumnRegionDataSet = (region) => {
-  const [isOnline, setIsOnline] = useState(null)
+  const [columnItems, setColumnItems] = useState(null)
 
-  const compareByRegionCode = (item) => {
-    return item.region_code == region.id
+  const setColumnDataSet = (region) => {
+    const compareByRegionCode = (item) => {
+      return item.region_code === region.id
+    }
+
+    if (region !== null) {
+      const graduateData = graduates.find(compareByRegionCode)
+      const vacancyData = vacancy.find(compareByRegionCode)
+      const studentData = students.find(compareByRegionCode)
+
+      const data = [
+        {
+          color: 'tomato',
+          items: [{x: 'it', y: graduateData.it}, {x: 'Все', y: graduateData.all}]
+        },
+        {
+          color: 'orange',
+          items: [{x: 'it', y: vacancyData.it}, {x: 'Все', y: vacancyData.all}]
+        },
+        {
+          color: 'green',
+          items: [{x: 'it', y: studentData.it}, {x: 'Все', y: studentData.all}]
+        }
+      ]
+      setColumnItems(data)
+    }
+
   }
 
-  const dataSet = [
-    graduates.find(compareByRegionCode),
-    vacansy.find(compareByRegionCode),
-    students.find(compareByRegionCode),
-  ]
-
-  const myDataset = [
-    [
-      {x: 'a', y: 1},
-      {x: 'b', y: 2},
-      {x: 'c', y: 3},
-      {x: 'd', y: 2},
-      {x: 'e', y: 1}
-    ],
-    [
-      {x: 'a', y: 2},
-      {x: 'b', y: 3},
-      {x: 'c', y: 4},
-      {x: 'd', y: 5},
-      {x: 'e', y: 5}
-    ],
-    [
-      {x: 'a', y: 1},
-      {x: 'b', y: 2},
-      {x: 'c', y: 3},
-      {x: 'd', y: 4},
-      {x: 'e', y: 4}
-    ]
-  ]
-
-  // ...
-
-  return isOnline
+  return [columnItems, setColumnDataSet]
 }

@@ -30,7 +30,7 @@ const DashboardNavbar = ({onMobileNavOpen, ...rest}) => {
       {...rest}
     >
       <Toolbar className={classes.toolBar}>
-        <RouterLink to="/">
+        <RouterLink to="/region_all">
           <Logo className={classes.logo}/>
         </RouterLink>
         <Box sx={{flexGrow: 1}}/>

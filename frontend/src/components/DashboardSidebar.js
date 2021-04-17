@@ -2,13 +2,7 @@ import {useEffect} from 'react'
 import {Link as RouterLink, useLocation} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Avatar, Box, Divider, Drawer, Hidden, List, Typography} from '@material-ui/core'
-import {
-  AlertCircle as AlertCircleIcon,
-  BarChart as BarChartIcon,
-  ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
-  Users as UsersIcon
-} from 'react-feather'
+import {BarChart as BarChartIcon} from 'react-feather'
 import NavItem from './NavItem'
 import {makeStyles} from '@material-ui/styles'
 
@@ -20,25 +14,15 @@ const user = {
 
 const items = [
   {
-    href: '/dashboard',
+    href: '/region_all',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'Россия'
   },
-  // {
-  //   href: '/customers',
-  //   icon: UsersIcon,
-  //   title: 'Customers'
-  // },
-  // {
-  //   href: '/account',
-  //   icon: UserIcon,
-  //   title: 'Account'
-  // },
-  // {
-  //   href: '/app/404',
-  //   icon: AlertCircleIcon,
-  //   title: 'Error'
-  // }
+  {
+    href: '/region_ekb',
+    icon: BarChartIcon,
+    title: 'Екатеринбург'
+  }
 ]
 
 const useStyles = makeStyles({
@@ -82,7 +66,7 @@ const DashboardSidebar = ({onMobileClose, openMobile}) => {
             width: 64,
             height: 64
           }}
-          to="/app/account"
+          to="/region_all"
         />
         <Typography
           color="textPrimary"

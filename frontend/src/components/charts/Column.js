@@ -1,76 +1,60 @@
-import {VictoryAxis, VictoryBar, VictoryChart, VictoryStack} from 'victory'
-import {Card, CardContent, Grid} from '@material-ui/core'
+import {VictoryBar, VictoryChart, VictoryContainer, VictoryGroup, VictoryLegend} from 'victory'
+import {Card, CardContent} from '@material-ui/core'
 
 const myDataset = [
   [
-    {x: 'a', y: 1},
-    {x: 'b', y: 2},
-    {x: 'c', y: 3},
-    {x: 'd', y: 2},
-    {x: 'e', y: 1}
+    {x: 'стуренты', y: 1},
+    {x: 'все', y: 2}
   ],
   [
-    {x: 'a', y: 2},
-    {x: 'b', y: 3},
-    {x: 'c', y: 4},
-    {x: 'd', y: 5},
-    {x: 'e', y: 5}
+    {x: 'стуренты', y: 4},
+    {x: 'все', y: 5}
   ],
   [
-    {x: 'a', y: 1},
-    {x: 'b', y: 2},
-    {x: 'c', y: 3},
-    {x: 'd', y: 4},
-    {x: 'e', y: 4}
+    {x: 'стуренты', y: 10},
+    {x: 'все', y: 20}
   ]
 ]
 
-export const ColumnChart = (props) => {
-  const transformData = (dataset) => {
-    const totals = dataset[0].map((data, i) => {
-      return dataset.reduce((memo, curr) => {
-        return memo + curr[i].y
-      }, 0)
-    })
-    return dataset.map((data) => {
-      return data.map((datum, i) => {
-        return {x: datum.x, y: (datum.y / totals[i]) * 100}
-      })
-    })
-  }
+export const ColumnChart = ({dataSet, ...props}) => {
+
   return (
     <Card
       sx={{height: '100%'}}
       {...props}
+      alignContent={'center'}
     >
       <CardContent>
-        <Grid
-          container
-          spacing={3}
-          sx={{justifyContent: 'space-between'}}
-        >
-          <Grid item>
-            <div>
-              <VictoryChart height={400} width={400}
-                            domainPadding={{x: 30, y: 20}}
-              >
-                <VictoryStack
-                  colorScale={['black', 'blue', 'tomato']}
-                >
-                  {transformData(myDataset).map((data, i) => {
-                    return <VictoryBar data={data} key={i}/>
-                  })}
-                </VictoryStack>
-                <VictoryAxis dependentAxis
-                             tickFormat={(tick) => `${tick}%`}
-                />
-                <VictoryAxis
-                  tickFormat={['a', 'b', 'c', 'd', 'e']}
-                />
-              </VictoryChart>
-            </div>
-          </Grid>
-        </Grid>
+        <div>
+          <VictoryChart width={650} containerComponent={<VictoryContainer responsive={true}/>}
+                        domainPadding={{x: 150, y: [0, 50]}}
+                        style={{width: '100%'}}
+                        padding={{left: 80, right: 100}}>
+            <VictoryLegend x={125} y={10}
+                           orientation="horizontal"
+                           gutter={20}
+                           style={{border: {stroke: 'black'}, title: {fontSize: 20}}}
+                           data={[
+                             {name: 'Выпускники', symbol: {fill: 'tomato'}},
+                             {name: 'Вакансии', symbol: {fill: 'gold'}},
+                             {name: 'Студенты', symbol: {fill: 'green'}}
+                           ]}
+            />
+            <VictoryGroup offset={40} colorScale={'qualitative'}>
+              {
+                dataSet.map((x, i) => {
+                  return (
+                    <VictoryBar
+                      key={i}
+                      style={{data: {fill: x.color}}}
+                      data={x.items}
+                    />
+                  )
+                })
+              }
+            </VictoryGroup>
+          </VictoryChart>
+        </div>
       </CardContent>
     </Card>
   )
