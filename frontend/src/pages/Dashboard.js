@@ -76,7 +76,7 @@ const Dashboard = () => {
               xs={12}
             >
               <InfoBlock
-                title="Выгода"
+                title="Средняя зарплата"
                 indicatorValue="55 200 руб."
                 icon={<PeopleIcon/>}
               />
