@@ -7,7 +7,12 @@ import InsertChartIcon from '@material-ui/icons/InsertChartOutlined'
 import Map from 'src/components/map/map'
 import ColumnChart from '../components/charts/Column'
 import {useEffect, useState} from 'react'
-import {getSpecialityOptions, useColumnRegionDataSet, useFetchSpecialities} from '../components/charts/utils'
+import {
+  getSpecialityOptions,
+  useColumnRegionDataSet,
+  useFetchRegionInfo,
+  useFetchSpecialities
+} from '../components/charts/utils'
 import MultipleSelect from '../components/Inputs/MultipleSelect/MultipleSelect'
 import {dynamicsSVE} from '../__mocks__/dinamika_SVE'
 import Line from '../components/charts/Line'
@@ -19,6 +24,7 @@ const DashboardRegion = () => {
   const [columnItems, setColumnDataSet] = useColumnRegionDataSet(activeRegion)
   const [specialities, setSpecialities] = useState([specialityOptions[0]])
   const [dynamicsData] = useFetchSpecialities(specialities)
+  const [regionInfos] = useFetchRegionInfo(activeRegion)
 
   useEffect(() => {
     setColumnDataSet(defaultRegion)
@@ -43,61 +49,6 @@ const DashboardRegion = () => {
           >
             <Grid
               item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
-              <InfoBlock
-                title="Абитуриенты"
-                indicatorValue="55 200 чел."
-                changeIndicator={15}
-                measureChangeIndicator={'%'}
-                period={'Сентябрь'}
-                icon={<PeopleIcon/>}
-              />
-            </Grid>
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
-              <InfoBlock
-                title="Выпускники"
-                indicatorValue="55 200 чел."
-                changeIndicator={-15}
-                measureChangeIndicator={'%'}
-                period={'Май'}
-                icon={<PeopleIcon/>}
-              />
-            </Grid>
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
-              <InfoProgress title="Выпускники" indicatorValue={75.5} icon={<InsertChartIcon/>}/>
-            </Grid>
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
-              <InfoBlock
-                title="Средняя зарплата"
-                indicatorValue="55 200 руб."
-                icon={<PeopleIcon/>}
-              />
-            </Grid>
-
-            <Grid
-              item
               lg={12}
               md={12}
               xl={12}
@@ -111,7 +62,23 @@ const DashboardRegion = () => {
                 }}
               />
             </Grid>
-
+            {regionInfos.map(x => {
+              return (
+                <Grid
+                  item
+                  lg={3}
+                  sm={6}
+                  xl={3}
+                  xs={12}
+                >
+                  <InfoBlock
+                    title={x.title}
+                    indicatorValue={x.indicatorValue}
+                    icon={x.icon}
+                  />
+                </Grid>
+              )
+            })}
             {!!activeRegion && !!columnItems && (
               <Grid
                 item
