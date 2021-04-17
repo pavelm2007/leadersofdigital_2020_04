@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 })
 
 const DashboardNavbar = ({onMobileNavOpen, ...rest}) => {
-  const [notifications] = useState([])
   const classes = useStyles()
 
   return (
