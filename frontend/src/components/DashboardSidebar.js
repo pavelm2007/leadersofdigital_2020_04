@@ -16,12 +16,22 @@ const items = [
   {
     href: '/region_all',
     icon: BarChartIcon,
-    title: 'Россия'
+    title: 'Аналитика'
   },
   {
     href: '/region_ekb',
     icon: BarChartIcon,
-    title: 'Екатеринбург'
+    title: 'Профиль'
+  },
+  {
+    href: '/region_ekb',
+    icon: BarChartIcon,
+    title: 'Настройки'
+  },
+  {
+    href: '/region_ekb',
+    icon: BarChartIcon,
+    title: 'Техническая поддержка'
   }
 ]
 

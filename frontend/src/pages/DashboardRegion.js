@@ -1,13 +1,11 @@
 import {Helmet} from 'react-helmet'
-import {Box, Card, CardContent, Container, Grid} from '@material-ui/core'
+import {Box, Card, CardContent, Container, Grid, Typography} from '@material-ui/core'
 import InfoBlock from 'src/components/dashboard/InfoBlock'
-import PeopleIcon from '@material-ui/icons/PeopleOutlined'
-import InfoProgress from '../components/dashboard/InfoProgress'
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined'
 import Map from 'src/components/map/map'
 import ColumnChart from '../components/charts/Column'
 import {useEffect, useState} from 'react'
 import {
+  getRegionTitleById,
   getSpecialityOptions,
   useColumnRegionDataSet,
   useFetchRegionInfo,
@@ -62,6 +60,35 @@ const DashboardRegion = () => {
                 }}
               />
             </Grid>
+            {!!activeRegion && (
+              <Grid
+                item
+                lg={12}
+                md={12}
+                xl={12}
+                xs={12}
+                alignContent={'center'}
+              >
+                <Card
+                  sx={{height: '100%'}}
+                >
+                  <CardContent>
+                    <Grid
+                      sx={{justifyContent: 'space-between'}}
+                    >
+                      <Typography
+                        align="center"
+                        color="textPrimary"
+                        gutterBottom
+                        variant="h3"
+                      >
+                        {getRegionTitleById(activeRegion)}
+                      </Typography>
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
+            )}
             {regionInfos.map(x => {
               return (
                 <Grid
@@ -98,16 +125,13 @@ const DashboardRegion = () => {
               xl={6}
               xs={12}
             >
-              <Card>
-                <CardContent>
-                  <MultipleSelect
-                    options={specialityOptions}
-                    handleChange={(items) => setSpecialities(items)}
-                    title="Специальность"
-                  />
-                </CardContent>
-              </Card>
-              {!!dynamicsData && <Line dataSet={dynamicsData}/>}
+              <Line dataSet={dynamicsData}>
+                <MultipleSelect
+                  options={specialityOptions}
+                  handleChange={(items) => setSpecialities(items)}
+                  title="Специальность"
+                />
+              </Line>
             </Grid>
           </Grid>
         </Container>

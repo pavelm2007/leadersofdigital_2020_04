@@ -13,7 +13,7 @@ const InfoBlock = (props) => {
       <CardContent>
         <Grid
           container
-          spacing={3}
+          spacing={2}
           sx={{justifyContent: 'space-between'}}
         >
           <Grid item>
@@ -26,21 +26,10 @@ const InfoBlock = (props) => {
             </Typography>
             <Typography
               color="textPrimary"
-              variant="h3"
+              variant="h5"
             >
               {indicatorValue}
             </Typography>
-          </Grid>
-          <Grid item>
-            <Avatar
-              sx={{
-                backgroundColor: changeIndicator < 0 ? red[600] : green[600],
-                height: 56,
-                width: 56
-              }}
-            >
-              {icon}
-            </Avatar>
           </Grid>
         </Grid>
         <Box

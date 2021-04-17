@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const MultipleSelect = ({options, handleChange, title}) => {
+const MultipleSelect = ({options, handleChange, title, multiple = true, value}) => {
   const classes = useStyles()
-  const [value, setValue] = useState([options[0]])
+  // const [value, setValue] = useState([options[0]])
   return (
     <div className={classes.root}>
       <Autocomplete
         value={value}
-        multiple
+        multiple={multiple}
         limitTags={2}
         id="multiple-limit-tags"
         options={options}
@@ -28,12 +28,12 @@ const MultipleSelect = ({options, handleChange, title}) => {
           return option.title
         }}
         renderInput={(params) => (
-          <TextField {...params} variant="outlined" label={title} placeholder={title}/>
+          <TextField {...params} variant="outlined" fullWidth label={title} placeholder={title}/>
         )}
 
         onChange={(event, newValue) => {
           handleChange(newValue)
-          setValue(newValue)
+          // setValue(newValue)
         }}
       />
     </div>

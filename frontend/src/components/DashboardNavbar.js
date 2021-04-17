@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {AppBar, Badge, Box, colors, Hidden, IconButton, Toolbar} from '@material-ui/core'
+import {AppBar, Badge, Box, colors, Hidden, IconButton, Toolbar, Typography} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
 import InputIcon from '@material-ui/icons/Input'
@@ -33,18 +33,27 @@ const DashboardNavbar = ({onMobileNavOpen, ...rest}) => {
         <RouterLink to="/region_all">
           <Logo className={classes.logo}/>
         </RouterLink>
-        <Box sx={{flexGrow: 1}}/>
+        <Box sx={{flexGrow: 1}}>
+          <Typography
+            align="center"
+            color="primary"
+            gutterBottom
+            variant="h4"
+          >
+            Единая система мониторинга потребности в IT-кадрах
+          </Typography>
+        </Box>
+
         <Hidden lgDown>
           <IconButton color="default" className={classes.btn}>
             <Badge
-              badgeContent={notifications.length}
+              badgeContent={8}
               color="primary"
-              variant="dot"
             >
               <NotificationsIcon/>
             </Badge>
           </IconButton>
-          <IconButton  color="default" className={classes.btn}>
+          <IconButton color="default" className={classes.btn}>
             <InputIcon/>
           </IconButton>
         </Hidden>

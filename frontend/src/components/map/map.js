@@ -2,6 +2,7 @@ import {Card, CardContent, colors, Grid} from '@material-ui/core'
 import {useState} from 'react'
 import {makeStyles} from '@material-ui/styles'
 import {regionPaths, regions} from './map_paths'
+import {getRegionTitleById} from '../charts/utils'
 
 const useStyles = makeStyles({
   path: {
@@ -40,6 +41,15 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
     handleChoiceRegion(region)
   }
 
+  const getRegionPath = () => {
+    return regionPaths.map(item => {
+      return {
+        ...item,
+        title: getRegionTitleById(item)
+      }
+    })
+  }
+
   return (
     <Card
       {...other}
@@ -52,8 +62,8 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
           <Grid item>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
                  xmlnsXlink="http://www.w3.org/1999/xlink" version="1.2" x="0px" y="0px"
-                 height="620px" viewBox="0 0 1090 620" xmlSpace="preserve">
-              {regionPaths.map((item, i) => {
+                 height="320px" viewBox="0 0 1090 620" xmlSpace="preserve">
+              {getRegionPath().map((item, i) => {
                 const {id} = activeRegion || {}
                 return (
                   <path
@@ -61,7 +71,7 @@ const Map = ({handleChoiceRegion, activeRegion = null, showTooltip = true, ...ot
                     className={item.id === id ? [classes.activePath] : classes.path}
                     d={item.path}
                     stroke={item.id === id ? colors.lime.A100 : colors.lime.A700}
-                    strokeWidth="0.5"
+                    strokeWidth={item.id === id ? '5.5' : '0.5'}
                     id={item.id}
                     onClick={(e) => handleClick(item, e)}
                     // onMouseOver={(e) => handleClick(item, e)}
